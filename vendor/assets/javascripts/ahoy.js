@@ -127,7 +127,7 @@
   function saveEventQueue() {
     // TODO add stringify method for IE 7 and under
     if (canStringify) {
-      setCookie("adr_events", JSON.stringify(eventQueue), 1);
+      setCookie("ahoy_events", JSON.stringify(eventQueue), 1);
     }
   }
 
@@ -217,7 +217,7 @@
 
     visitId = ahoy.getVisitId();
     visitorId = ahoy.getVisitorId();
-    track = getCookie("adr_track");
+    track = getCookie("ahoy_track");
 
     if (visitId && visitorId && !track) {
       // TODO keep visit alive?
@@ -225,21 +225,21 @@
       setReady();
     } else {
       if (track) {
-        destroyCookie("adr_track");
+        destroyCookie("ahoy_track");
       }
 
       if (!visitId) {
         visitId = generateId();
-        setCookie("adr_visit", visitId, visitTtl);
+        setCookie("ahoy_visit", visitId, visitTtl);
       }
 
       // make sure cookies are enabled
-      if (getCookie("adr_visit")) {
+      if (getCookie("ahoy_visit")) {
         log("Visit started");
 
         if (!visitorId) {
           visitorId = generateId();
-          setCookie("adr_visitor", visitorId, visitorTtl);
+          setCookie("ahoy_visitor", visitorId, visitorTtl);
         }
 
         var data = {
@@ -267,18 +267,18 @@
   }
 
   ahoy.getVisitId = ahoy.getVisitToken = function () {
-    return getCookie("adr_visit");
+    return getCookie("ahoy_visit");
   };
 
   ahoy.getVisitorId = ahoy.getVisitorToken = function () {
-    return getCookie("adr_visitor");
+    return getCookie("ahoy_visitor");
   };
 
   ahoy.reset = function () {
-    destroyCookie("adr_visit");
-    destroyCookie("adr_visitor");
-    destroyCookie("adr_events");
-    destroyCookie("adr_track");
+    destroyCookie("ahoy_visit");
+    destroyCookie("ahoy_visitor");
+    destroyCookie("ahoy_events");
+    destroyCookie("ahoy_track");
     return true;
   };
 
@@ -377,7 +377,7 @@
 
   // push events from queue
   try {
-    eventQueue = JSON.parse(getCookie("adr_events") || "[]");
+    eventQueue = JSON.parse(getCookie("ahoy_events") || "[]");
   } catch (e) {
     // do nothing
   }
