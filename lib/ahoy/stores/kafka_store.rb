@@ -29,11 +29,11 @@ module Ahoy
       end
 
       def visits_topic
-        "ahoy_visits"
+        "adr_visits"
       end
 
       def events_topic
-        "ahoy_events"
+        "adr_events"
       end
     end
   end

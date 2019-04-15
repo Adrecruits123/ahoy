@@ -22,11 +22,11 @@ module Ahoy
       end
 
       def visits_queue
-        "ahoy_visits"
+        "adr_visits"
       end
 
       def events_queue
-        "ahoy_events"
+        "adr_events"
       end
     end
   end

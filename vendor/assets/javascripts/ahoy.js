@@ -95,7 +95,7 @@
   }
 
   function log(message) {
-    if (getCookie("ahoy_debug")) {
+    if (getCookie("adr_debug")) {
       window.console.log(message);
     }
   }
@@ -127,7 +127,7 @@
   function saveEventQueue() {
     // TODO add stringify method for IE 7 and under
     if (canStringify) {
-      setCookie("ahoy_events", JSON.stringify(eventQueue), 1);
+      setCookie("adr_events", JSON.stringify(eventQueue), 1);
     }
   }
 
@@ -217,7 +217,7 @@
 
     visitId = ahoy.getVisitId();
     visitorId = ahoy.getVisitorId();
-    track = getCookie("ahoy_track");
+    track = getCookie("adr_track");
 
     if (visitId && visitorId && !track) {
       // TODO keep visit alive?
@@ -225,21 +225,21 @@
       setReady();
     } else {
       if (track) {
-        destroyCookie("ahoy_track");
+        destroyCookie("adr_track");
       }
 
       if (!visitId) {
         visitId = generateId();
-        setCookie("ahoy_visit", visitId, visitTtl);
+        setCookie("adr_visit", visitId, visitTtl);
       }
 
       // make sure cookies are enabled
-      if (getCookie("ahoy_visit")) {
+      if (getCookie("adr_visit")) {
         log("Visit started");
 
         if (!visitorId) {
           visitorId = generateId();
-          setCookie("ahoy_visitor", visitorId, visitorTtl);
+          setCookie("adr_visitor", visitorId, visitorTtl);
         }
 
         var data = {
@@ -267,18 +267,18 @@
   }
 
   ahoy.getVisitId = ahoy.getVisitToken = function () {
-    return getCookie("ahoy_visit");
+    return getCookie("adr_visit");
   };
 
   ahoy.getVisitorId = ahoy.getVisitorToken = function () {
-    return getCookie("ahoy_visitor");
+    return getCookie("adr_visitor");
   };
 
   ahoy.reset = function () {
-    destroyCookie("ahoy_visit");
-    destroyCookie("ahoy_visitor");
-    destroyCookie("ahoy_events");
-    destroyCookie("ahoy_track");
+    destroyCookie("adr_visit");
+    destroyCookie("adr_visitor");
+    destroyCookie("adr_events");
+    destroyCookie("adr_track");
     return true;
   };
 
@@ -377,7 +377,7 @@
 
   // push events from queue
   try {
-    eventQueue = JSON.parse(getCookie("ahoy_events") || "[]");
+    eventQueue = JSON.parse(getCookie("adr_events") || "[]");
   } catch (e) {
     // do nothing
   }

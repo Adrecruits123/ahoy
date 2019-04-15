@@ -31,11 +31,11 @@ module Ahoy
       end
 
       def visits_stream
-        "ahoy_visits"
+        "adr_visits"
       end
 
       def events_stream
-        "ahoy_events"
+        "adr_events"
       end
     end
   end
